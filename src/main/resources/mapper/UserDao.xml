@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zzuzl.dao.UserDao">
+    <select id="searchBySchoolNum" resultType="com.zzuzl.model.User">
+        select
+        school_num as "schoolNum",
+        `name`,
+        sex,
+        grade,
+        class_code as "classCode"
+        from
+        t_user
+        where
+        school_num=#{schoolNum}
+    </select>
+
+    <insert id="addUser" >
+        insert into
+        t_user(
+        school_num,
+        `name`,
+        sex,
+        grade,
+        class_code
+        )
+        values (
+        #{schoolNum},
+        #{name},
+        #{sex},
+        #{grade},
+        #{classCode}
+        )
+    </insert>
+</mapper>

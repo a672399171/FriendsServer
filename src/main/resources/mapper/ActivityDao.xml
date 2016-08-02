@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zzuzl.dao.ActivityDao">
+
+    <select id="searchActivitys" resultType="com.zzuzl.model.Activity">
+        select
+        u.school_num as "user.schoolNum",
+        u.`name` as "user.name",
+        u.sex as "user.sex",
+        u.grade as "user.grade",
+        u.class_code as "user.classCode",
+        a.activity_id as "actovityId",
+        a.content,
+        a.location,
+        a.post_time as "postTime"
+        from
+        t_activity a,
+        t_user u
+        where
+        a.school_num=u.school_num
+        order by a.post_time desc
+        <if test="count != null and count &gt; 0">
+            limit ${start},${count}
+        </if>
+    </select>
+
+    <select id="getActivityCount" resultType="int">
+        select
+        count(*) as num
+        from
+        t_activity a,
+        t_user u
+        where
+        a.school_num=u.school_num
+    </select>
+</mapper>
