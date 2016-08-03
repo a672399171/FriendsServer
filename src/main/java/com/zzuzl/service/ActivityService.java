@@ -10,4 +10,8 @@ public interface ActivityService {
     Result<Activity> searchActivitys(int page,int pageSize);
 
     int getActivityCount();
+
+    Result addActivity(Activity activity);
+
+    Result deleteActivity(long id);
 }

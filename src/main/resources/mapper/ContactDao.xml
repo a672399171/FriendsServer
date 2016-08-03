@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zzuzl.dao.ContactDao">
+    <select id="searchContact" resultType="com.zzuzl.model.Contact">
+        select
+        c.create_time as "createTime"
+        f.school_num as "from.schoolNum",
+        f.`name` as "from.name",
+        f.sex as "from.sex",
+        f.grade as "from.grade",
+        f.class_code as "from.classCode",
+        t.school_num as "to.schoolNum",
+        t.`name` as "to.name",
+        t.sex as "to.sex",
+        t.grade as "to.grade",
+        t.class_code as "to.classCode"
+        from
+        t_contact c,
+        t_user f,
+        t_user t
+        where
+        c.from=f.school_num
+        and c.to=t.school_num
+        and (c.from=#{id} or c.to=#{id})
+    </select>
+
+    <insert id="addContact">
+        insert into
+        t_contact(
+        `from`,
+        `to`
+        )
+        values (
+        #{from},
+        #{to}
+        )
+    </insert>
+
+    <delete id="deleteContact">
+        delete from t_contact
+        where `from` in
+        <foreach collection="users" item="item" separator="," open="(" close=")">
+          #{item}
+        </foreach>
+        and `to` in
+        <foreach collection="users" item="item" separator="," open="(" close=")">
+            #{item}
+        </foreach>
+    </delete>
+</mapper>

@@ -29,4 +29,22 @@ public class ActivityServiceImpl implements ActivityService {
     public int getActivityCount() {
         return activityDao.getActivityCount();
     }
+
+    public Result addActivity(Activity activity) {
+        Result result = new Result();
+        if(activityDao.addActivity(activity) < 1) {
+            result.setSuccess(false);
+            result.setError("发表失败");
+        }
+        return result;
+    }
+
+    public Result deleteActivity(long id) {
+        Result result = new Result();
+        if(activityDao.deleteActivity(id) < 1) {
+            result.setSuccess(false);
+            result.setError("删除失败");
+        }
+        return result;
+    }
 }

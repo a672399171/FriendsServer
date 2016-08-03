@@ -13,4 +13,8 @@ public interface ActivityDao {
                                    @Param("count") int count);
 
     int getActivityCount();
+
+    int addActivity(Activity activity);
+
+    int deleteActivity(long id);
 }

@@ -15,11 +15,11 @@ import javax.servlet.http.HttpSession;
 public class AuthorizationInterceptor implements HandlerInterceptor {
 
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        response.addHeader("Access-Control-Allow-Origin","*");
+        /*response.addHeader("Access-Control-Allow-Origin","*");
         response.addHeader("Access-Control-Allow-Methods","*");
         response.addHeader("Access-Control-Max-Age","100");
         response.addHeader("Access-Control-Allow-Headers", "Content-Type");
-        response.addHeader("Access-Control-Allow-Credentials","false");
+        response.addHeader("Access-Control-Allow-Credentials","false");*/
         /*HttpSession session = request.getSession();
         HandlerMethod method = (HandlerMethod) handler;
         Authorization auth = method.getMethodAnnotation(Authorization.class);

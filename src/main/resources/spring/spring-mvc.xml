@@ -35,5 +35,6 @@
     <!--处理静态资源请求-->
     <mvc:default-servlet-handler/>
 
-    <!--<mvc:resources mapping="/resources/**" location="/resources/" cache-period="31536000"/>-->
+    <!--<mvc:resources mapping="/resources/**" location="/resources/" cache-period="31536000"/>
+    <mvc:resources mapping="/admin/**" location="/admin/" cache-period="31536000"/>-->
 </beans>

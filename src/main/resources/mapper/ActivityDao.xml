@@ -35,4 +35,16 @@
         where
         a.school_num=u.school_num
     </select>
+
+    <insert id="addActivity">
+        insert into t_activity
+        (school_num,content,location)
+        VALUES
+        (#{schoolNum},#{content},#{location})
+    </insert>
+
+    <delete id="deleteActivity">
+        delete from t_activity
+        where activity_id=#{id}
+    </delete>
 </mapper>
