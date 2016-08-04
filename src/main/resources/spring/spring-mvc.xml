@@ -14,9 +14,15 @@
 
     <bean id="loginAuthInterceptor" class="com.zzuzl.common.interceptor.AuthorizationInterceptor"/>
 
+    <bean id="domainInterceptor" class="com.zzuzl.common.interceptor.DomainInterceptor"/>
+
     <mvc:interceptors>
         <mvc:interceptor>
             <mvc:mapping path="/**"/>
+            <ref bean="domainInterceptor"/>
+        </mvc:interceptor>
+        <mvc:interceptor>
+            <mvc:mapping path="/admin/**"/>
             <ref bean="loginAuthInterceptor"/>
         </mvc:interceptor>
     </mvc:interceptors>

@@ -5,4 +5,12 @@ package com.zzuzl.common;
  */
 public class Common {
     public static final int SMALL_COUNT = 10;
+
+    // 身份认证
+    public static final String AUTH_USER = "auth_user";
+    public static final String AUTH_ADMIN = "auth_admin";
+
+    // session存储
+    public static final String USER = "user";
+    public static final String ADMIN = "admin";
 }

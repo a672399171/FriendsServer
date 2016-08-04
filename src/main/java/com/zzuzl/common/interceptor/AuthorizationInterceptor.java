@@ -1,5 +1,6 @@
 package com.zzuzl.common.interceptor;
 
+import com.zzuzl.common.Common;
 import com.zzuzl.common.annotaion.Authorization;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -15,22 +16,21 @@ import javax.servlet.http.HttpSession;
 public class AuthorizationInterceptor implements HandlerInterceptor {
 
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        /*response.addHeader("Access-Control-Allow-Origin","*");
-        response.addHeader("Access-Control-Allow-Methods","*");
-        response.addHeader("Access-Control-Max-Age","100");
-        response.addHeader("Access-Control-Allow-Headers", "Content-Type");
-        response.addHeader("Access-Control-Allow-Credentials","false");*/
-        /*HttpSession session = request.getSession();
+        HttpSession session = request.getSession();
         HandlerMethod method = (HandlerMethod) handler;
         Authorization auth = method.getMethodAnnotation(Authorization.class);
         if (auth != null) {
             String value = auth.value();
-            if (value.equals(Common.AUTH_USER_LOGIN)
+            if (value.equals(Common.AUTH_USER)
                     && session.getAttribute(Common.USER) == null) {
                 response.sendRedirect("/login");
                 return false;
+            } else if(value.equals(Common.AUTH_ADMIN)
+                    && session.getAttribute(Common.ADMIN) == null) {
+                response.sendRedirect("/admin/login.html");
+                return false;
             }
-        }*/
+        }
         return true;
     }
 

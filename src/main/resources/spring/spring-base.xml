@@ -14,6 +14,9 @@
     <!-- firebase app -->
     <bean id="firebase" class="com.zzuzl.common.Firebase"/>
 
+    <!-- 验证码 -->
+    <bean id="kaptchaExtend" class="com.google.code.kaptcha.servlet.KaptchaExtend"/>
+
     <!-- SpringMVC上传文件时,需配置MultipartResolver处理器 -->
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
         <property name="maxUploadSize" value="2000000"/>
