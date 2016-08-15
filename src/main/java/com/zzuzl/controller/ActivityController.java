@@ -22,8 +22,8 @@ public class ActivityController {
 
     @RequestMapping("/")
     @ResponseBody
-    public Result<Activity> searchActivitys() {
-        return activityService.searchActivitys(1, Common.SMALL_COUNT);
+    public Result<Activity> searchActivities() {
+        return activityService.searchActivities(1, Common.SMALL_COUNT);
     }
 
     @RequestMapping("/add")

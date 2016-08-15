@@ -4,7 +4,7 @@
 
 <mapper namespace="com.zzuzl.dao.ActivityDao">
 
-    <select id="searchActivitys" resultType="com.zzuzl.model.Activity">
+    <select id="searchActivities" resultType="com.zzuzl.model.Activity">
         select
         u.school_num as "user.schoolNum",
         u.`name` as "user.name",

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zzuzl.dao.CommentDao">
+    <cache eviction="LRU"
+            flushInterval="60000"
+            size="512"
+            readOnly="true"/>
+
+    <select id="searchComments" resultType="com.zzuzl.model.Comment">
+        select
+        c.activity_id as "activity.activityId",
+        c.create_time as "createTime",
+        c.content as "content",
+        f.school_num as "from.schoolNum",
+        f.name as "from.name",
+        t.school_num as "to.schoolNum",
+        t.name as "to.name"
+        from
+        t_comment c,
+        t_user f,
+        t_activity a
+        where
+        c.from=f.school_num
+        and c.activity_id=a.activity_id
+        <if test="from != null and from != ''">
+            and c.from=#{from}
+        </if>
+        <if test="activityId != 0">
+            and l.activity_id=#{activityId}
+        </if>
+        left join on t_user t on
+        c.to=t.school_num
+        ORDER by c.create_time asc
+        <if test="count &gt; 0">
+            limit ${start},${count}
+        </if>
+    </select>
+
+    <select id="getById" resultType="com.zzuzl.model.Comment">
+        select
+        c.activity_id as "activity.activityId",
+        c.create_time as "createTime",
+        c.content as "content",
+        f.school_num as "from.schoolNum",
+        f.name as "from.name",
+        t.school_num as "to.schoolNum",
+        t.name as "to.name"
+        from
+        t_comment c,
+        t_user f,
+        t_activity a
+        where
+        c.from=f.school_num
+        and c.activity_id=a.activity_id
+        and c.comment_id=#{commentId}
+        left join on t_user t on
+        c.to=t.school_num
+    </select>
+
+    <insert id="addComment">
+        insert into t_comment(
+        `from`,
+        `to`,
+        activity_id,
+        school_num
+        ) values(
+        #{from},
+        #{to},
+        #{activityId},
+        #{content}
+        )
+    </insert>
+
+    <delete id="deleteComment">
+        delete from t_comment
+        where
+        and comment_id=#{commentId}
+    </delete>
+
+</mapper>

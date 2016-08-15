@@ -39,7 +39,6 @@ public class Firebase {
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Object document = dataSnapshot.getValue();
-                System.out.println(document);
             }
 
             public void onCancelled(DatabaseError databaseError) {

@@ -1,6 +1,7 @@
 package com.zzuzl.model;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by zhanglei53 on 2016/8/2.
@@ -11,6 +12,24 @@ public class Activity {
     private String content;
     private String location;
     private Date postTime;
+    private List<Like> likes;
+    private List<Comment> comments;
+
+    public List<Like> getLikes() {
+        return likes;
+    }
+
+    public void setLikes(List<Like> likes) {
+        this.likes = likes;
+    }
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
+    }
 
     public long getActivityId() {
         return activityId;

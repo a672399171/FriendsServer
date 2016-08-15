@@ -13,4 +13,8 @@ public class Common {
     // session存储
     public static final String USER = "user";
     public static final String ADMIN = "admin";
+
+    // redis key
+    public static final String HASH_LIKE = "hash_like";
+    public static final String HASH_COMMENT = "hash_comment";
 }

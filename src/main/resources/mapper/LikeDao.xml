@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zzuzl.dao.LikeDao">
+    <cache eviction="LRU"
+           flushInterval="60000"
+           size="512"
+           readOnly="true"/>
+
+    <select id="searchLikes" resultType="com.zzuzl.model.Like">
+        select
+        l.school_num as "user.schoolNum",
+        l.activity_id as "activity.activityId",
+        l.create_time as "createTime"
+        from
+        t_like l,
+        t_user u,
+        t_activity a
+        where
+        l.school_num=u.school_num
+        and l.activity_id=a.activity_id
+        <if test="schoolNum != null and schoolNum != ''">
+            and l.school_num=#{schoolNum}
+        </if>
+        <if test="activityId != 0">
+            and l.activity_id=#{activityId}
+        </if>
+        ORDER by l.create_time desc
+        <if test="count &gt; 0">
+            limit ${start},${count}
+        </if>
+    </select>
+
+    <select id="getLike" resultType="com.zzuzl.model.Like">
+        select
+        l.school_num as "user.schoolNum",
+        l.activity_id as "activity.activityId",
+        l.create_time as "createTime"
+        from
+        t_like l,
+        t_user u,
+        t_activity a
+        where
+        l.school_num=u.school_num
+        and l.activity_id=a.activity_id
+        and l.school_num=#{schoolNum}
+        and l.activity_id=#{activityId}
+    </select>
+
+    <insert id="addLike">
+        insert into t_like(
+        school_num,
+        activity_id
+        ) values(
+        #{schoolNum},
+        #{activityId}
+        )
+        on duplicate key
+        update
+    </insert>
+
+    <delete id="deleteLike">
+        delete from t_like
+        where
+        school_num=#{schoolNum}
+        and activity_id=#{activityId}
+    </delete>
+</mapper>
