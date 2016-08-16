@@ -17,4 +17,5 @@ public class Common {
     // redis key
     public static final String HASH_LIKE = "hash_like";
     public static final String HASH_COMMENT = "hash_comment";
+    public static final String HASH_ACTIVITY = "hash_activity";
 }

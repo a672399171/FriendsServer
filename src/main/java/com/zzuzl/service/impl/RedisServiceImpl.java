@@ -5,10 +5,12 @@ import com.zzuzl.common.Common;
 import com.zzuzl.dao.CommentDao;
 import com.zzuzl.dao.LikeDao;
 import com.zzuzl.dto.Result;
+import com.zzuzl.model.Activity;
 import com.zzuzl.model.Comment;
 import com.zzuzl.model.Like;
 import com.zzuzl.service.RedisService;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.ScanOptions;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -66,5 +68,13 @@ public class RedisServiceImpl implements RedisService {
             }
         }
         redisTemplate.delete(Common.HASH_LIKE);
+    }
+
+    public Result<Activity> searchActivities(int page, int count) {
+        Result<Activity> result = new Result<Activity>();
+        redisTemplate.boundHashOps(Common.HASH_ACTIVITY);
+
+
+        return result;
     }
 }
