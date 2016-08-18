@@ -4,35 +4,41 @@
 
 <mapper namespace="com.zzuzl.dao.CommentDao">
     <cache eviction="LRU"
-            flushInterval="60000"
-            size="512"
-            readOnly="true"/>
+           flushInterval="60000"
+           size="512"
+           readOnly="true"/>
 
     <select id="searchComments" resultType="com.zzuzl.model.Comment">
-        select
-        c.activity_id as "activity.activityId",
-        c.create_time as "createTime",
-        c.content as "content",
-        f.school_num as "from.schoolNum",
-        f.name as "from.name",
-        t.school_num as "to.schoolNum",
-        t.name as "to.name"
-        from
+        SELECT
+        cfa.activity_id AS "activity.activityId",
+        cfa.create_time AS "createTime",
+        cfa.content AS "content",
+        cfa.school_num AS "from.schoolNum",
+        cfa.name AS "from.name",
+        t.school_num AS "to.schoolNum",
+        t.name AS "to.name"
+        FROM
+        (SELECT
+        c.activity_id ,
+        c.create_time ,
+        c.content ,
+        c.to,
+        f.school_num ,
+        f.name
+        FROM
         t_comment c,
-        t_user f,
-        t_activity a
-        where
+        t_user f
+        WHERE
         c.from=f.school_num
-        and c.activity_id=a.activity_id
         <if test="from != null and from != ''">
             and c.from=#{from}
         </if>
         <if test="activityId != 0">
             and l.activity_id=#{activityId}
         </if>
-        left join on t_user t on
-        c.to=t.school_num
-        ORDER by c.create_time asc
+        ORDER BY c.create_time ASC) cfa
+        LEFT JOIN t_user t ON
+        cfa.`to`=t.school_num
         <if test="count &gt; 0">
             limit ${start},${count}
         </if>

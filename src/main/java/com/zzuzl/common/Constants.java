@@ -3,12 +3,18 @@ package com.zzuzl.common;
 /**
  * Created by zhanglei53 on 2016/8/1.
  */
-public class Common {
+public class Constants {
     public static final int SMALL_COUNT = 10;
 
     // 身份认证
     public static final String AUTH_USER = "auth_user";
     public static final String AUTH_ADMIN = "auth_admin";
+
+    // header中token
+    public static final String TOKEN = "token";
+
+    // token time
+    public static final String EXP = "exp";
 
     // session存储
     public static final String USER = "user";

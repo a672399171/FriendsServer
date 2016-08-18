@@ -1,6 +1,6 @@
 package com.zzuzl.dto;
 
-import com.zzuzl.common.Common;
+import com.zzuzl.common.Constants;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -96,7 +96,7 @@ public class Result<E> implements Serializable {
             page = 1;
         }
         if (pageSize <= 0) {
-            pageSize = Common.SMALL_COUNT;
+            pageSize = Constants.SMALL_COUNT;
         }
         totalPage = totalItem % pageSize == 0 ? totalItem / pageSize : totalItem / pageSize + 1;
         if (page > totalPage) {

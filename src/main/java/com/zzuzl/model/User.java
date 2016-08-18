@@ -4,7 +4,6 @@ package com.zzuzl.model;
  * Created by zhanglei53 on 2016/8/2.
  */
 public class User {
-    private int id;
     private String schoolNum;
     private String name;
     private String sex;
@@ -17,14 +16,6 @@ public class User {
 
     public void setGrade(String grade) {
         this.grade = grade;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getSchoolNum() {

@@ -41,24 +41,6 @@
         <property name="from" value="${mail.username}"/>
     </bean>
 
-    <!-- 配置发送模板bean-->
-    <bean id="freeMarkerConfigurer"
-          class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
-        <property name="templateLoaderPaths">
-            <list>
-                <value>/WEB-INF/tpl/</value>
-            </list>
-        </property>
-        <property name="freemarkerSettings">
-            <props>
-                <!-- 模板更新延时 -->
-                <prop key="template_update_delay">1800</prop>
-                <prop key="default_encoding">UTF-8</prop>
-                <prop key="locale">zh_CN</prop>
-            </props>
-        </property>
-    </bean>
-
     <!-- redis -->
     <bean id="jedisConnFactory"
           class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">

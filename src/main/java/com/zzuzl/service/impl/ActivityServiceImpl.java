@@ -6,6 +6,7 @@ import com.zzuzl.dao.LikeDao;
 import com.zzuzl.dto.Result;
 import com.zzuzl.model.Activity;
 import com.zzuzl.model.Comment;
+import com.zzuzl.model.Like;
 import com.zzuzl.service.ActivityService;
 import com.zzuzl.service.RedisService;
 import org.springframework.stereotype.Service;
@@ -32,8 +33,8 @@ public class ActivityServiceImpl implements ActivityService {
         List<Activity> activities = activityDao.searchActivities((page - 1) * pageSize, pageSize);
 
         for(Activity activity : activities) {
-            activity.setLikes(redisService.getActivityLikes(activity.getActivityId()));
-            activity.setComments(redisService.getActivityComments(activity.getActivityId()));
+            activity.setLikes(likeDao.searchLikes(null, activity.getActivityId(), 0, 0));
+            activity.setComments(commentDao.searchComments(null,null,activity.getActivityId(),0,0));
         }
 
         result.setTotalItem(activityDao.getActivityCount());
@@ -47,14 +48,10 @@ public class ActivityServiceImpl implements ActivityService {
 
     public Result addActivity(Activity activity) {
         Result result = new Result();
-        /*if(activityDao.addActivity(activity) < 1) {
+        if(activityDao.addActivity(activity) < 1) {
             result.setSuccess(false);
             result.setError("发表失败");
-        }*/
-
-        // 改用firebase替代方案
-
-
+        }
 
         return result;
     }

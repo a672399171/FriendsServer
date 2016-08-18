@@ -40,7 +40,7 @@
         insert into t_activity
         (school_num,content,location)
         VALUES
-        (#{schoolNum},#{content},#{location})
+        (#{user.schoolNum},#{content},#{location})
     </insert>
 
     <delete id="deleteActivity">

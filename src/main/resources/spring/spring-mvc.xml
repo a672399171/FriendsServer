@@ -22,7 +22,7 @@
             <ref bean="domainInterceptor"/>
         </mvc:interceptor>
         <mvc:interceptor>
-            <mvc:mapping path="/admin/**"/>
+            <mvc:mapping path="/**"/>
             <ref bean="loginAuthInterceptor"/>
         </mvc:interceptor>
     </mvc:interceptors>
