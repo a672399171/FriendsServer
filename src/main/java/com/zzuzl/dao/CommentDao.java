@@ -13,7 +13,7 @@ public interface CommentDao {
                    @Param("activityId") long activityId,
                    @Param("content") String content);
 
-    int deleteLike(@Param("commentId") long commentId);
+    int deleteComment(@Param("commentId") long commentId);
 
     List<Comment> searchComments(@Param("from") String from,
                                  @Param("to") String to,

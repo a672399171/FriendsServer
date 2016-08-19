@@ -1,6 +1,5 @@
 package com.zzuzl.controller;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.zzuzl.common.Constants;
 import com.zzuzl.common.Firebase;
 import com.zzuzl.common.annotaion.Authorization;
@@ -13,7 +12,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 import javax.annotation.Resource;
 import java.util.HashMap;
 import java.util.Map;

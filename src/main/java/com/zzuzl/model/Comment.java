@@ -1,11 +1,15 @@
 package com.zzuzl.model;
 
+import com.zzuzl.dto.Result;
+import com.zzuzl.util.ObjectUtil;
+import com.zzuzl.util.StringUtil;
+
 import java.util.Date;
 
 /**
  * Created by zhanglei53 on 2016/8/15.
  */
-public class Comment {
+public class Comment extends BaseBean {
     private long commentId;
     private User from;
     private User to;
@@ -59,5 +63,19 @@ public class Comment {
 
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
+    }
+
+    public Result isValid() {
+        Result result = new Result();
+        if (ObjectUtil.hasNull(from, to, activity, content)) {
+            result.setSuccess(false);
+            result.setError("部分内容为空");
+        } else if (!StringUtil.isSchoolNum(from.getSchoolNum()) ||
+                !StringUtil.isSchoolNum(to.getSchoolNum()) ||
+                StringUtil.isEmpty(content)) {
+            result.setSuccess(false);
+            result.setError("学号为空或内容为空");
+        }
+        return result;
     }
 }

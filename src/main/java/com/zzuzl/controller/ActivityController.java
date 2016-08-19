@@ -6,6 +6,7 @@ import com.zzuzl.model.Activity;
 import com.zzuzl.service.ActivityService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
 import javax.annotation.Resource;
 
 @Controller
@@ -14,24 +15,51 @@ public class ActivityController {
     @Resource
     private ActivityService activityService;
 
-    @RequestMapping("/")
+    @RequestMapping("/listActivity")
     @ResponseBody
     public Result<Activity> searchActivities() {
-        // HttpSession session =
         return activityService.searchActivities(1, Constants.SMALL_COUNT);
     }
 
-    @RequestMapping(value = "/add",method = RequestMethod.POST)
+    @RequestMapping(value = "/addActivity", method = RequestMethod.POST)
     @ResponseBody
     public Result addActivity(@ModelAttribute("activity") Activity activity) {
-        // Result result = new Result();
-        Result result = activityService.addActivity(activity);
-        return result;
+        return activityService.addActivity(activity);
     }
 
-    @RequestMapping(value = "/delete",method = RequestMethod.POST)
+    @RequestMapping(value = "/deleteActivity", method = RequestMethod.POST)
     @ResponseBody
-    public Result deleteActivity(@RequestParam(required = false,defaultValue = "0") Long id) {
+    public Result deleteActivity(@RequestParam(required = false, defaultValue = "0") Long id) {
         return activityService.deleteActivity(id);
+    }
+
+    @RequestMapping(value = "/addLike", method = RequestMethod.POST)
+    @ResponseBody
+    public Result addLike(Long activityId) {
+        // TODO 增加学号
+        String schoolNum = "20133410139";
+        return activityService.addLike(schoolNum, activityId);
+    }
+
+    @RequestMapping(value = "/deleteLike", method = RequestMethod.POST)
+    @ResponseBody
+    public Result deleteLike(Long activityId) {
+        // TODO 增加学号
+        String schoolNum = "20133410139";
+        return activityService.deleteLike(schoolNum, activityId);
+    }
+
+    @RequestMapping(value = "/addComment", method = RequestMethod.POST)
+    @ResponseBody
+    public Result addComment(String to, Long activityId, String content) {
+        // TODO 增加学号
+        String from = "20133410139";
+        return activityService.addComment(from, to, activityId, content);
+    }
+
+    @RequestMapping(value = "/deleteComment", method = RequestMethod.POST)
+    @ResponseBody
+    public Result deleteComment(Long commentId) {
+        return activityService.deleteComment(commentId);
     }
 }

@@ -10,9 +10,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 
-/**
- * Created by zhanglei53 on 2016/8/3.
- */
 @Controller
 @RequestMapping("contact")
 public class ContactController {
