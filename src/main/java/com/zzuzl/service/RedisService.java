@@ -17,7 +17,7 @@ public interface RedisService {
 
     List<Comment> syncActivityComment(long activityId);
 
-    void syncLikeAndCommentToMysql();
-
     Result<Activity> searchActivities(int page,int count);
+
+    void clearActivityData();
 }
