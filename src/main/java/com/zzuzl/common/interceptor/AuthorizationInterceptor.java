@@ -47,18 +47,20 @@ public class AuthorizationInterceptor extends HandlerInterceptorAdapter {
                     lock.wait();
                 }
             }
+
+            if (!flag) {
+                Result result = new Result();
+                result.setSuccess(false);
+                result.setError("未认证");
+
+                response.getWriter().println(new ObjectMapper().writeValueAsString(result));
+                // response.sendError(401, "未认证");
+            }
+
+            return flag;
         }
 
-        if (!flag) {
-            Result result = new Result();
-            result.setSuccess(false);
-            result.setError("未认证");
-
-            response.getWriter().println(new ObjectMapper().writeValueAsString(result));
-            // response.sendError(401, "未认证");
-        }
-
-        return flag;
+        return true;
     }
 
     class MyListener implements OnCompleteListener<FirebaseToken> {

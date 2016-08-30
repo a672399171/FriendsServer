@@ -56,4 +56,14 @@
         <param-name>log4jConfiguration</param-name>
         <param-value>classpath:log4j2.xml</param-value>
     </context-param>
+
+    <!-- 跨域 -->
+    <filter>
+        <filter-name>domain</filter-name>
+        <filter-class>com.zzuzl.common.filter.DomainFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>domain</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
 </web-app>

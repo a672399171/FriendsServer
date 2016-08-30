@@ -19,6 +19,7 @@ public class NetUtil {
         Document document = null;
         try {
             document = Jsoup.connect(url)
+                    .timeout(10 * 1000)
                     .data("nianji", nianji)
                     .data("xuehao", schoolNum)
                     .data("mima", password)

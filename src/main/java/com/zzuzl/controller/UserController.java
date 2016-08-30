@@ -9,6 +9,7 @@ import com.zzuzl.service.UserService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -25,7 +26,6 @@ public class UserController {
     private UserService userService;
     private Logger logger = LogManager.getLogger(getClass());
 
-    @Authorization(Constants.AUTH_USER)
     @RequestMapping(value = "/login",method = RequestMethod.POST)
     @ResponseBody
     public Result login(String schoolNum, String password) {
