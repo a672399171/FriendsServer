@@ -11,16 +11,16 @@ public class CorsFilter implements Filter {
     }
 
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-        /*HttpServletResponse res = (HttpServletResponse) response;
-        res.addHeader("Access-Control-Allow-Origin", "http://localhost:8100");
+        HttpServletResponse res = (HttpServletResponse) response;
+        res.addHeader("Access-Control-Allow-Origin", "*");
         res.addHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE");
         res.addHeader("Access-Control-Max-Age", "3600");
-        // res.addHeader("Access-Control-Allow-Credentials", "true");
         res.addHeader("Access-Control-Allow-Headers", "X-Requested-With, Content-Type, Accept");
-*/
+        // res.addHeader("Access-Control-Allow-Credentials", "true");
+
         HttpServletRequest req = (HttpServletRequest) request;
-        if(req.getMethod().equalsIgnoreCase("OPTIONS")) {
-            // res.setStatus(200);
+        if (req.getMethod().equalsIgnoreCase("OPTIONS")) {
+            res.setStatus(200);
         } else {
             chain.doFilter(request, response);
         }

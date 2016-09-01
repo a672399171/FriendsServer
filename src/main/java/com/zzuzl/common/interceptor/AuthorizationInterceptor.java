@@ -77,7 +77,7 @@ public class AuthorizationInterceptor extends HandlerInterceptorAdapter {
                 flag = task.isSuccessful();
                 if (flag) {
                     logger.info(task.getResult().getUid());
-                    task.getResult().getClaims();
+                    // task.getResult().getClaims();
                 } else {
                     logger.info("验证不通过");
                 }

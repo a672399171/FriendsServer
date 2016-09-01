@@ -43,11 +43,6 @@ public class UserController {
                 result.getData().put("user", user);
             } catch (Exception e) {
                 logger.error(e.getMessage());
-            } finally {
-                response.addHeader("Access-Control-Allow-Origin", "http://localhost:8100");
-                response.addHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE");
-                response.addHeader("Access-Control-Max-Age", "3600");
-                response.addHeader("Access-Control-Allow-Headers", "X-Requested-With, Content-Type, Accept");
             }
         }
 

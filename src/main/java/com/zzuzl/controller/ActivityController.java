@@ -1,6 +1,7 @@
 package com.zzuzl.controller;
 
 import com.zzuzl.common.Constants;
+import com.zzuzl.common.annotaion.Authorization;
 import com.zzuzl.dto.Result;
 import com.zzuzl.model.Activity;
 import com.zzuzl.service.ActivityService;
@@ -15,24 +16,28 @@ public class ActivityController {
     @Resource
     private ActivityService activityService;
 
+    @Authorization(Constants.AUTH_USER)
     @RequestMapping("/listActivity")
     @ResponseBody
     public Result<Activity> searchActivities() {
         return activityService.searchActivities(1, Constants.SMALL_COUNT);
     }
 
+    @Authorization(Constants.AUTH_USER)
     @RequestMapping(value = "/addActivity", method = RequestMethod.POST)
     @ResponseBody
     public Result addActivity(@ModelAttribute("activity") Activity activity) {
         return activityService.addActivity(activity);
     }
 
+    @Authorization(Constants.AUTH_USER)
     @RequestMapping(value = "/deleteActivity", method = RequestMethod.POST)
     @ResponseBody
     public Result deleteActivity(@RequestParam(required = false, defaultValue = "0") Long id) {
         return activityService.deleteActivity(id);
     }
 
+    @Authorization(Constants.AUTH_USER)
     @RequestMapping(value = "/addLike", method = RequestMethod.POST)
     @ResponseBody
     public Result addLike(Long activityId) {
@@ -41,6 +46,7 @@ public class ActivityController {
         return activityService.addLike(schoolNum, activityId);
     }
 
+    @Authorization(Constants.AUTH_USER)
     @RequestMapping(value = "/deleteLike", method = RequestMethod.POST)
     @ResponseBody
     public Result deleteLike(Long activityId) {
