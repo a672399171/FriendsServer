@@ -15,6 +15,16 @@
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
 
+    <!-- 跨域 -->
+    <filter>
+        <filter-name>corsFilter</filter-name>
+        <filter-class>com.zzuzl.common.CorsFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>corsFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
     <!-- spring解决编码问题 -->
     <filter>
         <filter-name>encodingFilter</filter-name>
@@ -57,13 +67,4 @@
         <param-value>classpath:log4j2.xml</param-value>
     </context-param>
 
-    <!-- 跨域 -->
-    <filter>
-        <filter-name>domain</filter-name>
-        <filter-class>com.zzuzl.common.filter.DomainFilter</filter-class>
-    </filter>
-    <filter-mapping>
-        <filter-name>domain</filter-name>
-        <url-pattern>/*</url-pattern>
-    </filter-mapping>
 </web-app>

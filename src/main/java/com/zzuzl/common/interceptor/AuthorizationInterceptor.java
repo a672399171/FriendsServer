@@ -32,32 +32,34 @@ public class AuthorizationInterceptor extends HandlerInterceptorAdapter {
     public boolean preHandle(final HttpServletRequest request, final HttpServletResponse response, final Object handler) throws Exception {
         response.setContentType("application/json;charset=utf-8");
 
-        final HandlerMethod method = (HandlerMethod) handler;
-        Authorization auth = method.getMethodAnnotation(Authorization.class);
-        flag = false;
-        Object lock = new Object();
+        if (handler instanceof HandlerMethod) {
+            final HandlerMethod method = (HandlerMethod) handler;
+            Authorization auth = method.getMethodAnnotation(Authorization.class);
+            flag = false;
+            Object lock = new Object();
 
-        if (auth != null) {
-            String value = auth.value();
-            String token = request.getHeader(Constants.TOKEN);
-            if (value.equals(Constants.AUTH_USER) && token != null) {
-                synchronized (lock) {
-                    firebase.getAuth().verifyIdToken(token)
-                            .addOnCompleteListener(new MyListener(lock));
-                    lock.wait();
+            if (auth != null) {
+                String value = auth.value();
+                String token = request.getHeader(Constants.TOKEN);
+                if (value.equals(Constants.AUTH_USER) && token != null) {
+                    synchronized (lock) {
+                        firebase.getAuth().verifyIdToken(token)
+                                .addOnCompleteListener(new MyListener(lock));
+                        lock.wait();
+                    }
                 }
+
+                if (!flag) {
+                    Result result = new Result();
+                    result.setSuccess(false);
+                    result.setError("未认证");
+
+                    response.getWriter().println(new ObjectMapper().writeValueAsString(result));
+                    // response.sendError(401, "未认证");
+                }
+
+                return flag;
             }
-
-            if (!flag) {
-                Result result = new Result();
-                result.setSuccess(false);
-                result.setError("未认证");
-
-                response.getWriter().println(new ObjectMapper().writeValueAsString(result));
-                // response.sendError(401, "未认证");
-            }
-
-            return flag;
         }
 
         return true;
