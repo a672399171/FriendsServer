@@ -15,7 +15,7 @@ public class CorsFilter implements Filter {
         res.addHeader("Access-Control-Allow-Origin", "*");
         res.addHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE");
         res.addHeader("Access-Control-Max-Age", "3600");
-        res.addHeader("Access-Control-Allow-Headers", "X-Requested-With, Content-Type, Accept");
+        res.addHeader("Access-Control-Allow-Headers", "X-Requested-With, Content-Type, Accept, token");
         // res.addHeader("Access-Control-Allow-Credentials", "true");
 
         HttpServletRequest req = (HttpServletRequest) request;

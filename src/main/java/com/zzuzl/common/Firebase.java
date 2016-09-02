@@ -26,12 +26,8 @@ public class Firebase {
                 .setDatabaseUrl("https://friends-7d8ec.firebaseio.com/")
                 .build();
 
-        if (options != null) {
-            FirebaseApp.initializeApp(options);
-        }
-
+        FirebaseApp.initializeApp(options);
         firebaseAuth = FirebaseAuth.getInstance();
-
         DatabaseReference ref = FirebaseDatabase
                 .getInstance()
                 .getReference("server/friends");

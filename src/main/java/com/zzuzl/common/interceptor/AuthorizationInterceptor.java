@@ -45,7 +45,7 @@ public class AuthorizationInterceptor extends HandlerInterceptorAdapter {
                     synchronized (lock) {
                         firebase.getAuth().verifyIdToken(token)
                                 .addOnCompleteListener(new MyListener(lock));
-                        lock.wait();
+                        lock.wait(5000);
                     }
                 }
 

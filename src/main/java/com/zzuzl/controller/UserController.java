@@ -33,7 +33,9 @@ public class UserController {
         if (result.isSuccess()) {
             try {
                 User user = (User) result.getData().get("user");
-                userService.addUser(user);
+                if(userService.searchBySchoolNum(user.getSchoolNum()) == null) {
+                    userService.addUser(user);
+                }
 
                 Map<String, Object> claims = new HashMap<String, Object>();
                 claims.put(Constants.USER, user);
