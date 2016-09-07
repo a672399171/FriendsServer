@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 @Controller
 @RequestMapping("activity")
@@ -19,8 +20,9 @@ public class ActivityController {
     @Authorization(Constants.AUTH_USER)
     @RequestMapping("/listActivity")
     @ResponseBody
-    public Result<Activity> searchActivities() {
-        return activityService.searchActivities(1, Constants.SMALL_COUNT);
+    public Result<Activity> searchActivities(@RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
+                                             @RequestParam(value = "pageSize", required = false, defaultValue = "10") Integer pageSize) {
+        return activityService.searchActivities(page, pageSize);
     }
 
     @Authorization(Constants.AUTH_USER)
@@ -40,29 +42,28 @@ public class ActivityController {
     @Authorization(Constants.AUTH_USER)
     @RequestMapping(value = "/addLike", method = RequestMethod.POST)
     @ResponseBody
-    public Result addLike(Long activityId) {
-        // TODO 增加学号
-        String schoolNum = "20133410139";
+    public Result addLike(Long activityId, HttpServletRequest request) {
+        String schoolNum = (String) request.getAttribute(Constants.SCHOOLNUM);
         return activityService.addLike(schoolNum, activityId);
     }
 
     @Authorization(Constants.AUTH_USER)
     @RequestMapping(value = "/deleteLike", method = RequestMethod.POST)
     @ResponseBody
-    public Result deleteLike(Long activityId) {
-        // TODO 增加学号
-        String schoolNum = "20133410139";
+    public Result deleteLike(Long activityId, HttpServletRequest request) {
+        String schoolNum = (String) request.getAttribute(Constants.SCHOOLNUM);
         return activityService.deleteLike(schoolNum, activityId);
     }
 
+    @Authorization(Constants.AUTH_USER)
     @RequestMapping(value = "/addComment", method = RequestMethod.POST)
     @ResponseBody
-    public Result addComment(String to, Long activityId, String content) {
-        // TODO 增加学号
-        String from = "20133410139";
+    public Result addComment(String to, Long activityId, String content, HttpServletRequest request) {
+        String from = (String) request.getAttribute(Constants.SCHOOLNUM);
         return activityService.addComment(from, to, activityId, content);
     }
 
+    @Authorization(Constants.AUTH_USER)
     @RequestMapping(value = "/deleteComment", method = RequestMethod.POST)
     @ResponseBody
     public Result deleteComment(Long commentId) {

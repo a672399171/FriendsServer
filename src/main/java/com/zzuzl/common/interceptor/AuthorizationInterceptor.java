@@ -4,28 +4,28 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.firebase.auth.FirebaseToken;
 import com.google.firebase.internal.NonNull;
 import com.google.firebase.tasks.OnCompleteListener;
-import com.google.firebase.tasks.OnSuccessListener;
 import com.google.firebase.tasks.Task;
 import com.zzuzl.common.Constants;
 import com.zzuzl.common.Firebase;
 import com.zzuzl.common.annotaion.Authorization;
 import com.zzuzl.dto.Result;
+import com.zzuzl.model.User;
+import com.zzuzl.util.AuthUtil;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.json.JSONObject;
 import org.springframework.web.method.HandlerMethod;
-import org.springframework.web.servlet.HandlerInterceptor;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import java.util.Map;
 
 public class AuthorizationInterceptor extends HandlerInterceptorAdapter {
     @Resource
     private Firebase firebase;
+    @Resource
+    private AuthUtil authUtil;
     private Logger logger = LogManager.getLogger(getClass());
     private boolean flag = false;
 
@@ -36,16 +36,21 @@ public class AuthorizationInterceptor extends HandlerInterceptorAdapter {
             final HandlerMethod method = (HandlerMethod) handler;
             Authorization auth = method.getMethodAnnotation(Authorization.class);
             flag = false;
-            Object lock = new Object();
 
             if (auth != null) {
                 String value = auth.value();
                 String token = request.getHeader(Constants.TOKEN);
                 if (value.equals(Constants.AUTH_USER) && token != null) {
-                    synchronized (lock) {
-                        firebase.getAuth().verifyIdToken(token)
-                                .addOnCompleteListener(new MyListener(lock));
-                        lock.wait(5000);
+                    Map<String, Object> claims = null;
+                    try {
+                        claims = authUtil.verifyToken(token);
+                        if (claims != null) {
+                            request.setAttribute(Constants.SCHOOLNUM, ((Map<String,Object>) claims.get(Constants.USER)).get("schoolNum"));
+                            flag = true;
+                        }
+                    } catch (Exception e) {
+                        logger.error(e.getMessage());
+                        flag = false;
                     }
                 }
 

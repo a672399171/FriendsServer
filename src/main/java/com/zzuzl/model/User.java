@@ -5,6 +5,7 @@ package com.zzuzl.model;
  */
 public class User {
     private String schoolNum;
+    private String password;
     private String name;
     private String sex;
     private String classCode;
@@ -24,6 +25,14 @@ public class User {
 
     public void setSchoolNum(String schoolNum) {
         this.schoolNum = schoolNum;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getName() {

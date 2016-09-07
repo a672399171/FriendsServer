@@ -3,6 +3,7 @@ import org.junit.Test;
 import javax.servlet.http.HttpSession;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
  * Created by zhanglei53 on 2016/8/24.
@@ -25,6 +26,19 @@ public class Test1 {
         map = new TreeMap<String, Object>();
 
         set = new TreeSet<String>();
+
+        Stack stack = new Stack();
+
+        Collection collection;
+        Iterator iterator;
+        ListIterator listIterator;
+        AbstractCollection abstractCollection;
+        AbstractList abstractList;
+        Queue queue;
+
+        set = Collections.synchronizedSet(new HashSet<String>());
+        list = Collections.synchronizedList(new ArrayList<String>());
+        list = new CopyOnWriteArrayList<String>();
     }
 
     @Test

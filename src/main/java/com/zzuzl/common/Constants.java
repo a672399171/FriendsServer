@@ -24,4 +24,13 @@ public class Constants {
     public static final String HASH_LIKE = "hash_like";
     public static final String HASH_COMMENT = "hash_comment";
     public static final String HASH_ACTIVITY = "hash_activity";
+
+    // secret
+    public static final String SECRET = "friends";
+
+    // request attribute
+    public static final String SCHOOLNUM = "school_num";
+
+    // product type
+    public static final String JSON_TYPE = "application/json";
 }

@@ -14,6 +14,16 @@
     <!-- firebase app -->
     <bean id="firebase" class="com.zzuzl.common.Firebase"/>
 
+    <!-- jwt signer -->
+    <bean id="signer" class="com.auth0.jwt.JWTSigner">
+        <constructor-arg name="secret" value="${secret}"/>
+    </bean>
+
+    <!-- jwt verifier -->
+    <bean id="verifier" class="com.auth0.jwt.JWTVerifier">
+        <constructor-arg name="secret" value="${secret}"/>
+    </bean>
+
     <!-- 验证码 -->
     <bean id="kaptchaExtend" class="com.google.code.kaptcha.servlet.KaptchaExtend"/>
 
