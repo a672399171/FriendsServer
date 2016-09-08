@@ -10,14 +10,12 @@ import com.zzuzl.model.Comment;
 import com.zzuzl.model.Like;
 import com.zzuzl.service.ActivityService;
 import com.zzuzl.service.RedisService;
-import com.zzuzl.util.ObjectUtil;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 @Service("redisService")
 public class RedisServiceImpl implements RedisService {

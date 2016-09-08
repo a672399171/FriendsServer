@@ -1,8 +1,8 @@
 package com.zzuzl.model;
 
 import com.zzuzl.dto.Result;
-import com.zzuzl.util.ObjectUtil;
-import com.zzuzl.util.StringUtil;
+import com.zzuzl.common.util.ObjectUtil;
+import com.zzuzl.common.util.StringUtil;
 
 import java.util.Date;
 

@@ -1,4 +1,4 @@
-package com.zzuzl.util;
+package com.zzuzl.common.util;
 
 /**
  * Created by zhanglei53 on 2016/8/19.

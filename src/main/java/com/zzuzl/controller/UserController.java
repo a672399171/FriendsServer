@@ -6,19 +6,15 @@ import com.zzuzl.common.annotaion.Authorization;
 import com.zzuzl.dto.Result;
 import com.zzuzl.model.User;
 import com.zzuzl.service.UserService;
-import com.zzuzl.util.AuthUtil;
+import com.zzuzl.common.util.AuthUtil;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletResponse;
-
-import static com.zzuzl.common.Constants.JSON_TYPE;
 
 @Controller
 @RequestMapping("user")

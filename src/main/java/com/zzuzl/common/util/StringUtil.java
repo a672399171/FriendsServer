@@ -1,4 +1,4 @@
-package com.zzuzl.util;
+package com.zzuzl.common.util;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

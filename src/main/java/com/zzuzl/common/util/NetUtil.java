@@ -33,7 +33,7 @@ public class NetUtil {
 
         if (document != null) {
             Elements elements = document.body().select(selec);
-            if (elements != null || elements.size() < 1) {
+            if (elements != null && elements.size() == 1) {
                 User user = new User();
                 user.setGrade(nianji);
                 user.setSchoolNum(schoolNum);
